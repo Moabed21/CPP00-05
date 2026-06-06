@@ -1,0 +1,47 @@
+- what are streams in iostream lib?
+
+A stream is an abstraction representing a continuous flow of data byte-by-byte between your program and external devices.
+
+Input Stream: Data flows from an external device (e.g., keyboard) into the program's main memory.
+
+Output Stream: Data flows out from the program's main memory to an external device (e.g., monitor).
+
+- what are namespaces?
+
+namespace is a container used to organize identifiers like variables,
+functions and classes. It helps in prevention of naming conflict when
+same names are used in different part of a program.
+
+- memory allocation : in c++ allocate using new operator to allocate a specific amount of data.
+to destroy it use delete operator
+
+- in OOP:
+
+classes names the variable they have as properties,
+while functions are named as methods.
+
+by default these are specified as private , you can change it to either public or protected.
+
+specifiers are:
+
+public: anyone can either read or write on the class members.
+private: no one can either read or write on the class members.
+protected: no one can either read or write on the class members except the inhereted classes.
+
+to interact with private properties or methods implement setter and getter functions(best practice).
+
+when you create an object of a class the first thing will be called is constructor,
+by default there is one clalled but its empty so you can create one by using class name ex. A(),
+you can create multiple constructors with formal parameters as you like.
+
+- polymorphism : modify the behavior or content of a method or property without touching the main behavior.
+has 2 types :
+1) ex. void displayinfo() , this function can be defined in a class(use 'virtual' to tell that
+its gonna be changed lated) ,
+
+then a child inherit this class with this method but its behavior has to change according
+to the child new properties to be displayed so you can change the body of it inside 
+the child without messing with the parent body using 'override' operator. (overriding).
+
+note : in some cases the code works even without 'virtual' and 'override' keywords but,
+the issue explained here: https://youtu.be/07AC2Syf4Yg?t=15818 
