@@ -1,7 +1,7 @@
 NAME     = phonebook
 CPP      = g++
 CPPFLAGS = -Wall -Wextra -Werror
-SRC      = main.cpp operations.cpp
+SRC      = main.cpp operations.cpp utils.cpp
 OBJ      = $(SRC:.cpp=.o)
 
 all: $(NAME)
