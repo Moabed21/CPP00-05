@@ -8,11 +8,6 @@ void	Contact::setcontact(std::string funame,std::string laname, std::string nick
 	dsecret = dasecret;
 	phone = phonenum;
 }
-// std::string    Contact::getcontact()
-// {
-
-// }
-
 
 void	filter(std::string cmd, PhoneBook *book)
 {

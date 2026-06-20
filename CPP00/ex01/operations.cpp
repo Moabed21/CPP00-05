@@ -2,21 +2,51 @@
 
 int count = 0;
 
+static std::string	truncate(std::string str)
+{
+	if (str.length() > 10)
+		return (str.substr(0, 9) + ".");
+	return (str);
+}
+
 void	search(PhoneBook *book)
 {
+	std::string x;
+	int i;
+	int index;
 
-	std::cout << 
-	for (int i = 0; i < 8; i++)
+	for (i = 0; i < 8; i++)
 	{
-		// std::cout<<"entering cmd";
-		
-		if(!book->contacts[i].getfname()[0])
+		if (book->contacts[i].getfname().empty())
 			break;
-		std::cout<<i<<std::setw(10)<<"|";
-		std::cout<<book->contacts[i].getfname()<<std::setw(10)<<std::setfill('*')<<"|";
-		std::cout<<book->contacts[i].getlname()<<std::setw(10)<<"|";
-		std::cout<<book->contacts[i].getniname()<< ".\n";
+		std::cout << std::setfill(' ') << std::setw(10) << i << "|";
+		std::cout << std::setw(10) << truncate(book->contacts[i].getfname()) << "|";
+		std::cout << std::setw(10) << truncate(book->contacts[i].getlname()) << "|";
+		std::cout << std::setw(10) << truncate(book->contacts[i].getniname()) << std::endl;
 	}
+	if (i == 0)
+	{
+		std::cout << "phonebook is empty." << std::endl;
+		return;
+	}
+	std::cout << "\nenter an index: ";
+	std::cin >> x;
+	if (x.length() != 1 || x[0] < '0' || x[0] > '7')
+	{
+		std::cout << "invalid index." << std::endl;
+		return;
+	}
+	index = x[0] - '0';
+	if (index >= i)
+	{
+		std::cout << "index out of range." << std::endl;
+		return;
+	}
+	std::cout << "first name: " << book->contacts[index].getfname() << std::endl;
+	std::cout << "last name: " << book->contacts[index].getlname() << std::endl;
+	std::cout << "nickname: " << book->contacts[index].getniname() << std::endl;
+	std::cout << "darkest secret: " << book->contacts[index].getdsec() << std::endl;
+	std::cout << "phone number: " << book->contacts[index].getnumber() << std::endl;
 }
 
 void	add(PhoneBook *book)
