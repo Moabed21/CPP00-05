@@ -1,9 +1,7 @@
-#ifndef HEADER_HPP
-#define HEADER_HPP
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
-#include <iomanip>
-#include <iostream>
-#include <string.h>
+#include "header.hpp"
 class Contact{
 	private:
 		std::string fname;
@@ -19,12 +17,4 @@ class Contact{
 		std::string getniname();
 		std::string getdsec();
 };
-
-class PhoneBook{
-	public:
-		Contact contacts[8];
-};
-void	search(PhoneBook *book);
-void	add(PhoneBook *book);
-
 #endif

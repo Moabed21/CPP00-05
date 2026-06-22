@@ -11,9 +11,9 @@ void	Contact::setcontact(std::string funame,std::string laname, std::string nick
 
 void	filter(std::string cmd, PhoneBook *book)
 {
-	if(!ft_strcmp(cmd,"SEARCH"))
+	if (cmd == "SEARCH")
 		search(book);
-	if(!ft_strcmp(cmd,"ADD"))
+	if (cmd == "ADD")
 		add(book);
 }
 int main()
@@ -24,8 +24,8 @@ int main()
 	while (1)
 	{
 		std::cout << "<< enter cmd >> ";
-		std::cin >> command;
-		if(!ft_strcmp(command, "EXIT"))
+		getline(std::cin,command);
+		if(command == "EXIT")
 			return(1);
 		filter(command, &book);
 	}

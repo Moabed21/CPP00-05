@@ -30,7 +30,7 @@ void	search(PhoneBook *book)
 		return;
 	}
 	std::cout << "\nenter an index: ";
-	std::cin >> x;
+	getline(std::cin,x);
 	if (x.length() != 1 || x[0] < '0' || x[0] > '7')
 	{
 		std::cout << "invalid index." << std::endl;
@@ -51,21 +51,29 @@ void	search(PhoneBook *book)
 
 void	add(PhoneBook *book)
 {
-	std::string	p;
-	std::string f ,l ,n ,d;
+	std::string p, f ,l ,n ,d;
 
 	count = count % 8;
 	std::cout << "enter first name: ";
-	std::cin >> f;
+	getline(std::cin,f);
+	if(f.empty())
+		return;
 	std::cout << "enter last name: ";
-	std::cin >> l;
+	getline(std::cin,l);
+	if(l.empty())
+		return;
 	std::cout << "enter nickname: ";
-	std::cin >> n;
+	getline(std::cin,n);
+	if(n.empty())
+		return;
 	std::cout << "enter darkest secret: ";
-	std::cin >> d;
+	getline(std::cin,d);
+	if(d.empty())
+		return;
 	std::cout<<"enter phone number: ";
-	std::cin >> p;
+	getline(std::cin,p);
+	if(p.empty())
+		return;
 	book->contacts[count].setcontact(f,l,n,d,p);
-	std::cout<<"con number : "<< count << std::endl;
 	count++;
 }

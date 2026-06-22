@@ -1,22 +1,10 @@
 #include <iostream>
-#include <cctype>
-using namespace std;
-
-int	strlen(string	a)
-{
-	int count = 0;
-
-	while (a[count])
-	{
-		count++;
-	}
-	return (count);
-}
+#include <string.h>
 
 int main(int ac , char **av)
 {
 	if (ac == 1)
-		cout<<"* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		std::cout<<"* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
 	else
 	{		
 		for (int i = 1; i < ac; i++)
@@ -24,15 +12,15 @@ int main(int ac , char **av)
 			int size = strlen(av[i]);
 			for (int j = 0; j < size; j++)
 			{
-				if(isalpha(av[i][j]))
+				if (isalpha(av[i][j]))
 				{
 					av[i][j] = toupper(av[i][j]);
 				}
 			}
-			cout<<av[i];
+			std::cout << av[i];
 			if (i != size - 1)
-				cout<<" ";
+				std::cout<<" ";
 		}
-		cout<<endl;
+		std::cout<<std::endl;
 	}
 }

@@ -1,13 +1,14 @@
 NAME     = phonebook
-CPP      = g++
+CPP      = c++
+HEADERS  = header.hpp Contact.hpp
 CPPFLAGS = -Wall -Wextra -Werror
 SRC      = main.cpp operations.cpp utils.cpp
 OBJ      = $(SRC:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJ) $(HEADERS)
+	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME) 
 
 %.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
