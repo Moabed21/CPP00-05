@@ -3,5 +3,6 @@
 int main()
 {
     Zombie s;
+    s.setname("allawi");
     s.announce();
 }
