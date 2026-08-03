@@ -2,7 +2,10 @@
 
 int main()
 {
-    Zombie *s;
-    s->zombieHorde(7,"a");
-    
+    Zombie *s = zombieHorde(7,"a");
+    for (int i = 0; i < 7; i++)
+    {
+        s[i].announce();
+    }
+    delete[]  s;
 }

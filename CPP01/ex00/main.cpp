@@ -2,7 +2,9 @@
 
 int main()
 {
-    Zombie s;
-    s.setname("allawi");
-    s.announce();
+    Zombie *s = newZombie("allawi");
+    
+    s->announce();
+    delete s;
+    return (0);
 }

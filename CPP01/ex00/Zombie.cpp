@@ -1,31 +1,14 @@
 #include "Zombie.hpp"
 
-std::string    Zombie::getname()
-{
-    return (name);
-}
-
-void    Zombie::setname(std::string name)
-{
-    Zombie::name = name;
-}
 void    Zombie::announce()
 {
-    std::cout<<getname()<<": "<<"BraiiiiiiinnnzzzZ...\n";
+    std::cout<< this->name <<": "<<"BraiiiiiiinnnzzzZ...\n";
 }
 
-Zombie* Zombie::newZombie( std::string name )
-{
-    Zombie *zombie = new Zombie;
-    zombie->name = name;
-    return zombie;
+Zombie::Zombie(std::string name){
+    this->name = name;
 }
-
-void Zombie::randomChump( std::string name )
+Zombie::~Zombie()
 {
-    Zombie *zombie = new Zombie;
-    zombie->name = name;
-    zombie->announce();
-    delete zombie;
-
+    std::cout<<this->name<< ": is destroyed"<<std::endl;
 }
