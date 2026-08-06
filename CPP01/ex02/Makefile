@@ -1,6 +1,6 @@
 NAME	 = this_is_brain
 C++		 = c++
-CPPFLAGS = #-Wall -Wextra -Werror
+CPPFLAGS = -Wall -Wextra -Werror
 SRC		 = main.cpp
 OBJ = $(SRC:.cpp=.o)
 RM  = rm -f

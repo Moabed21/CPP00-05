@@ -1,19 +1,22 @@
 #include "HumanB.hpp"
-#include "Weapon.hpp"
-void    HumanB::attack()
-{
-    std::cout<<this->name<<" attacks with their "<<this->weapon.getType();
 
-}
-void    HumanB::setWeapon(Weapon weapon)
+HumanB::HumanB(std::string name) : name(name), weapon(NULL)
 {
-    this->weapon = weapon;
 }
-HumanB::HumanB(std::string name)
+
+HumanB::~HumanB()
 {
-    this->name = name;
 }
-void    HumanB::setType(std::string type)
+
+void HumanB::setWeapon(Weapon &weapon)
 {
-    this->weapon.setType(type);
+    this->weapon = &weapon;
+}
+
+void HumanB::attack() const
+{
+    if (this->weapon)
+        std::cout << this->name << " attacks with their " << this->weapon->getType() << std::endl;
+    else
+        std::cout << this->name << " has no weapon to attack with" << std::endl;
 }
