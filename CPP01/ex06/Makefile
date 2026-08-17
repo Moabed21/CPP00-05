@@ -1,7 +1,7 @@
-NAME	 = replace
+NAME	 = harlFilter
 CXX		 = c++
 CXXFLAGS = -Wall -Wextra -Werror
-SRC		 = main.cpp 
+SRC		 = main.cpp Harl.cpp
 OBJ		 = $(SRC:.cpp=.o)
 RM		 = rm -f
 

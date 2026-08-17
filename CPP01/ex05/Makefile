@@ -1,7 +1,7 @@
-NAME	 = replace
+NAME	 = Harl
 CXX		 = c++
 CXXFLAGS = -Wall -Wextra -Werror
-SRC		 = main.cpp 
+SRC		 = main.cpp Harl.cpp
 OBJ		 = $(SRC:.cpp=.o)
 RM		 = rm -f
 
