@@ -29,10 +29,10 @@ class Fixed
 		bool operator==(const Fixed &c) const;
 		bool operator!=(const Fixed &c) const;
 
-		Fixed operator+(const Fixed &c);
-		Fixed operator-(const Fixed &c);
-		Fixed operator*(const Fixed &c);
-		Fixed operator/(const Fixed &c);
+		Fixed operator+(const Fixed &c) const;
+		Fixed operator-(const Fixed &c) const;
+		Fixed operator*(const Fixed &c) const;
+		Fixed operator/(const Fixed &c) const;
 
 		// pre, increment then store the current
 		Fixed &operator++();

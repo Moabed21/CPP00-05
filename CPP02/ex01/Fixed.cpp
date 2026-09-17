@@ -5,16 +5,25 @@ Fixed::Fixed()
 	std::cout<<"Default constructor called\n";
 	fixedvalue = 0;
 }
-// copy constructor
+Fixed::Fixed(const int num)
+{
+    std::cout << "Int constructor called\n";
+	this->setRawBits(num << fraction);
+}
+Fixed::Fixed(const float num)
+{
+    std::cout << "Float constructor called\n" ;
+	fixedvalue = roundf(num * (1 << fraction));
+}
 Fixed::Fixed(const Fixed &fixed)
 {
 	std::cout<<"Copy constructor called\n";
-	this->fixedvalue = fixed.fixedvalue;
+	this->setRawBits(fixed.getRawBits());
 }
 Fixed &Fixed::operator=(const Fixed &c)
 {
 	std::cout<<"Copy assignment operator called\n";
-	this->fixedvalue = c.fixedvalue;
+	this->setRawBits(c.getRawBits());
 	return (*this);
 }
 Fixed::~Fixed()
@@ -24,25 +33,12 @@ Fixed::~Fixed()
 int Fixed::getRawBits( void ) const
 {
 	std::cout<<"getRawBits member function called\n";
-	return(fixedvalue >> fraction);
+	return (this->fixedvalue);
 }
 void Fixed::setRawBits( int const raw )
 {
 	std::cout<<"setRawBits member function called\n";
 	fixedvalue = raw;
-}
-
-Fixed::Fixed(const int num)
-{
-	// converting integer means left shift by number of fractions
-    std::cout << "Int constructor called\n";
-	fixedvalue = num << fraction;
-}
-
-Fixed::Fixed(const float num)
-{
-    std::cout << "Float constructor called\n";
-	fixedvalue = roundf(num * (1 << fraction));
 }
 
 // https://embeddedartistry.com/blog/2018/07/12/simple-fixed-point-conversion-in-c/
@@ -62,4 +58,3 @@ std::ostream    &operator<<(std::ostream &o, const Fixed &obj)
 	o << obj.toFloat();
 	return (o);
 }
-

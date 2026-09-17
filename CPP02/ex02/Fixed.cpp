@@ -1,5 +1,4 @@
 #include "Fixed.hpp"
-#include <cmath>
 
 Fixed::Fixed()
 {
@@ -8,11 +7,12 @@ Fixed::Fixed()
 // copy constructor
 Fixed::Fixed(const Fixed &fixed)
 {
-	this->fixedvalue = fixed.fixedvalue;
+	*this = fixed;
 }
 Fixed &Fixed::operator=(const Fixed &c)
 {
-	this->fixedvalue = c.fixedvalue;
+	if (this != &c)
+		this->fixedvalue = c.fixedvalue;
 	return (*this);
 }
 Fixed::~Fixed()
@@ -20,11 +20,11 @@ Fixed::~Fixed()
 }
 int Fixed::getRawBits( void ) const
 {
-	return(fixedvalue >> fraction);
+	return (this->fixedvalue);
 }
 void Fixed::setRawBits( int const raw )
 {
-	fixedvalue = raw;
+	this->fixedvalue = raw;
 }
 
 Fixed::Fixed(const int num)
@@ -83,36 +83,42 @@ bool Fixed::operator!=(const Fixed &c) const
 	return (this->fixedvalue != c.fixedvalue);
 }
 
-Fixed Fixed::operator+(const Fixed &other)
+Fixed Fixed::operator+(const Fixed &other) const
 {
 	Fixed temp;
-	temp.fixedvalue = this->fixedvalue + other.fixedvalue;
-	return temp;
-
-}
-Fixed Fixed::operator-(const Fixed &other)
-{
-	Fixed temp;
-	temp.fixedvalue = this->fixedvalue - other.fixedvalue;
-	return temp;
-
-}
-// we shifted to the right by fraction cuz we store every fixedpoint number as
-// number * 256, to get the real value we shift
-Fixed Fixed::operator*(const Fixed &other)
-{
-	Fixed temp;
-	temp.fixedvalue = (this->fixedvalue * other.fixedvalue)>> fraction;
-	return temp;
-}
-// check
-Fixed Fixed::operator/(const Fixed &other)
-{
-	Fixed temp;
-	temp.fixedvalue = (this->fixedvalue / other.fixedvalue)<<fraction;
+	temp.setRawBits(this->fixedvalue + other.fixedvalue);
 	return temp;
 }
 
+Fixed Fixed::operator-(const Fixed &other) const
+{
+	Fixed temp;
+	temp.setRawBits(this->fixedvalue - other.fixedvalue);
+	return temp;
+}
+
+// Fixed point multiplication: (A * B) >> 8
+// Cast to long long to prevent 32-bit integer overflow before shifting
+Fixed Fixed::operator*(const Fixed &other) const
+{
+	Fixed temp;
+	temp.setRawBits(((long long)this->fixedvalue * (long long)other.fixedvalue) >> fraction);
+	return temp;
+}
+
+// Fixed point division: ((long long)A << 8) / B
+// Left shift first to maintain precision, cast to long long to prevent overflow
+Fixed Fixed::operator/(const Fixed &other) const
+{
+	if (other.fixedvalue == 0)
+	{
+		std::cerr << "Error: Division by zero\n";
+		return Fixed(0);
+	}
+	Fixed temp;
+	temp.setRawBits(((long long)this->fixedvalue << fraction) / other.fixedvalue);
+	return temp;
+}
 
 Fixed &Fixed::operator++()
 {
@@ -145,7 +151,7 @@ Fixed& Fixed::min(Fixed& a, Fixed& b)
 }
 const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
 {
-	return((a > b) ? a : b);
+	return((a < b) ? a : b);
 }
 Fixed& Fixed::max(Fixed& a, Fixed& b)
 {
